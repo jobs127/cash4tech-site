@@ -1,3 +1,17 @@
+// Light / dark toggle. Default follows the system; a click saves the visitor's choice.
+(function () {
+  var btn = document.querySelector('.theme-btn');
+  if (!btn) return;
+  var root = document.documentElement;
+  btn.addEventListener('click', function () {
+    var cur = root.getAttribute('data-theme') ||
+      (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    var next = cur === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('c4t-theme', next); } catch (e) {}
+  });
+})();
+
 // Cash4Tech — small, dependency-free site script.
 
 // Mobile menu

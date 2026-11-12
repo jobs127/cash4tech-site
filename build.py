@@ -152,7 +152,10 @@ def page_shell(path, title, desc, body, active=None, noindex=False, schema=None)
 <meta property="og:title" content="{escape(title)}">
 <meta property="og:description" content="{escape(desc)}">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0e0e13" media="(prefers-color-scheme: dark)">
+<meta name="color-scheme" content="light dark">
+<script>try{{var t=localStorage.getItem('c4t-theme');if(t)document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}</script>
 <link rel="icon" href="{u('assets/img/favicon.svg')}" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -170,6 +173,10 @@ def page_shell(path, title, desc, body, active=None, noindex=False, schema=None)
     <a class="logo" href="{u('')}">{LOGO}</a>
     <button class="menu-btn" aria-expanded="false" aria-controls="nav-links">Menu</button>
     <ul class="nav-links" id="nav-links">{''.join(nav_items)}</ul>
+    <button class="theme-btn" type="button" aria-label="Switch light or dark mode" title="Light / dark mode">
+      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
+    </button>
     <div class="nav-cta">
       <a class="btn btn-ghost" href="{b['phone_href']}" data-track="click_to_call">{icon('call')}Call</a>
       <a class="btn btn-green" href="{DIRECTIONS_URL}" target="_blank" rel="noopener" data-track="get_directions">Directions</a>
