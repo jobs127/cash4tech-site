@@ -24,7 +24,7 @@ BUSINESS = {
     "area": "Kansas City Northland",
     "street": None,          # not yet provided
     "postal": None,
-    "email": None,           # not yet provided
+    "email": "info@getcash4tech.com",
     "ebay_store": None,      # eBay store URL, not yet provided
     # Planned hours from the brief. Shown with a flag until hours_confirmed is True.
     "hours": [("Monday – Friday", "10 AM – 7 PM"), ("Saturday", "10 AM – 4 PM"), ("Sunday", "10 AM – 4 PM")],
@@ -32,7 +32,7 @@ BUSINESS = {
 }
 
 SHOPIFY = {
-    "domain": None,            # e.g. "cash4tech.myshopify.com"
+    "domain": "cash4tech-4.myshopify.com",
     "storefront_token": None,  # Storefront API public access token (Headless channel)
     "api_version": "2025-07",
     # Stays False until the owner activates payments. While False, product pages show

@@ -69,8 +69,8 @@ HERO_ART = """
     <rect x="96" y="30" width="168" height="310" rx="30" fill="#17151f" stroke="#3a3746" stroke-width="3"/>
     <rect x="108" y="44" width="144" height="282" rx="20" fill="url(#scr)"/>
     <rect x="156" y="52" width="48" height="10" rx="5" fill="#0b0b0f"/>
-    <text x="180" y="170" text-anchor="middle" font-family="Archivo, Arial Black, sans-serif" font-weight="900" font-size="30" fill="#fff">CA<tspan fill="#6cc24a">$</tspan>H</text>
-    <text x="180" y="205" text-anchor="middle" font-family="Archivo, Arial Black, sans-serif" font-weight="900" font-size="30" fill="#fff"><tspan fill="#6cc24a">4</tspan><tspan fill="#c9a0ee">TECH</tspan></text>
+    <text x="180" y="170" text-anchor="middle" font-family="Inter Tight, Arial, sans-serif" font-weight="900" font-size="30" fill="#fff">CA<tspan fill="#6cc24a">$</tspan>H</text>
+    <text x="180" y="205" text-anchor="middle" font-family="Inter Tight, Arial, sans-serif" font-weight="900" font-size="30" fill="#fff"><tspan fill="#6cc24a">4</tspan><tspan fill="#c9a0ee">TECH</tspan></text>
     <rect x="132" y="250" width="96" height="30" rx="15" fill="#509e2f"/>
     <text x="180" y="270" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="12" fill="#fff">GET AN OFFER</text>
   </g>
@@ -78,7 +78,7 @@ HERO_ART = """
     <rect width="120" height="64" rx="8" fill="url(#cash)"/>
     <rect x="6" y="6" width="108" height="52" rx="5" fill="none" stroke="#d6f2c8" stroke-width="1.5" opacity=".7"/>
     <circle cx="60" cy="32" r="16" fill="none" stroke="#e8f8df" stroke-width="2"/>
-    <text x="60" y="39" text-anchor="middle" font-family="Archivo, Arial Black, sans-serif" font-weight="900" font-size="20" fill="#fff">$</text>
+    <text x="60" y="39" text-anchor="middle" font-family="Inter Tight, Arial, sans-serif" font-weight="900" font-size="20" fill="#fff">$</text>
   </g>
   <g transform="translate(236 250) rotate(12)">
     <path d="M22 0h76a22 22 0 0 1 22 22v8a22 22 0 0 1-40 13l-6-7H46l-6 7A22 22 0 0 1 0 30v-8A22 22 0 0 1 22 0z" fill="#2a1240" stroke="#a874d6" stroke-width="2.5"/>
@@ -152,11 +152,11 @@ def page_shell(path, title, desc, body, active=None, noindex=False, schema=None)
 <meta property="og:title" content="{escape(title)}">
 <meta property="og:description" content="{escape(desc)}">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#0b0b0f">
+<meta name="theme-color" content="#ffffff">
 <link rel="icon" href="{u('assets/img/favicon.svg')}" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{u('assets/css/site.css')}">
 {gtm_head}
 {schema_tag}
@@ -242,7 +242,7 @@ def cta_band(heading="Ready to turn your tech into cash?",
       </div>
       <div class="btn-row">
         <a class="btn btn-green" href="{DIRECTIONS_URL}" target="_blank" rel="noopener" data-track="get_directions">{icon('pin')}Get Directions</a>
-        <a class="btn btn-ghost" style="color:#fff" href="{BUSINESS['phone_href']}" data-track="click_to_call">{icon('call')}{BUSINESS['phone']}</a>
+        <a class="btn btn-ghost" href="{BUSINESS['phone_href']}" data-track="click_to_call">{icon('call')}{BUSINESS['phone']}</a>
       </div>
     </div>
   </div>
@@ -608,7 +608,7 @@ def sell_index():
                      eyebrow="Sell your tech") + f"""
 <section class="section">
   <div class="wrap">
-    <div class="grid grid-3">{category_tiles('sell')}</div>
+    <div class="grid grid-4">{category_tiles('sell')}</div>
     <div class="card mt-3">
       <h3>Popular right now</h3>
       <div class="chips mb-0">{''.join(f'<a class="chip" href="{{{{base}}}}sell/{n["seg"]}">Sell your {n["name"]}</a>' for n in NODES if n["kind"] != "category")}</div>
@@ -802,7 +802,7 @@ def home():
       <h2>Phones, tablets, laptops, consoles and more</h2>
       <p class="lede">What we can accept and what we offer depend on the model, condition, specs and demand.</p>
     </div>
-    <div class="grid grid-3">{category_tiles('sell')}</div>
+    <div class="grid grid-4">{category_tiles('sell')}</div>
   </div>
 </section>
 
