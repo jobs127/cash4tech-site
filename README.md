@@ -1,21 +1,28 @@
 # Cash4Tech website (demo)
 
-Demo of getcash4tech.com for Cash4Tech, Inc. in Gladstone, MO. The focus is getting local sellers through the door (Phase 1), with room to grow into online sales through Shopify.
+Demo of getcash4tech.com for Cash4Tech, Inc. in Gladstone, MO.
 
-**Live preview:** https://jobs127.github.io/cash4tech-site/
-**Roadmap page:** https://jobs127.github.io/cash4tech-site/roadmap/
+- **Sell Your Tech** (`/sell/...`): landing pages that bring local sellers into the store (cash offers, in person).
+- **Buy Electronics** (`/buy/...`): reads the live Shopify catalog. The ERP already creates one Shopify product per physical device, and this site only reads it.
 
-## How it's built
-- Plain static HTML/CSS/JS with no framework, so it loads fast and hosts anywhere.
-- `build.py` generates every page into `docs/`, which GitHub Pages serves.
-- Business facts (address, hours, email, eBay and Shopify links) live at the top of `build.py`. Anything left as `None` shows as a yellow ⚑ flag on the site.
+**Live preview:** https://jobs127.github.io/cash4tech-site/ · **Roadmap:** https://jobs127.github.io/cash4tech-site/roadmap/
+
+## Editing
+Everything editable lives in **`content.py`**:
+- `BUSINESS`: address, hours, email and links. `None` shows as a yellow ⚑ flag.
+- `SHOPIFY`: store domain plus a Storefront API **public** token (read-only). Never put an Admin API token here.
+- `TAXONOMY`: category → brand → model. Each entry creates a Sell page and a Buy page. Add a model in a few lines, then rebuild. `query` is the Shopify product search for that Buy page.
+- `SELL_FAQS` / `BUY_FAQS`.
 
 ```
-python3 build.py        # rebuild docs/
+python3 build.py     # regenerates docs/ (served by GitHub Pages: main /docs)
 ```
+
+## Ground rules (from Cash4Tech)
+- Don't activate Shopify Payments or any live payment processing. `checkout_enabled` stays `False` until the owner turns payments on.
+- Don't modify the ERP or its Shopify sync. The site never writes inventory.
+- No online quotes, mail-in or online payment to sellers. Sellers are paid in cash, in store.
+- DNS lives in Cloudflare. Keep the Gmail MX, SPF, DKIM and DMARC records untouched.
 
 ## Before launch
-- Fill in the ⚑ items (address, hours, policies, links) and set `DEMO = False`. That removes the banner and flags and lets search engines index the site.
-- Set `SHOPIFY_STORE_URL` and `GTM_ID`.
-- Connect the contact form to a form service.
-- Point getcash4tech.com at the site.
+Fill in the ⚑ items, add the Shopify token, match each `query` to the ERP's product types, vendors and tags, add the logo, set `GTM_ID`, set `DEMO = False`, and then point the domain.
