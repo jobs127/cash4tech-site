@@ -64,12 +64,18 @@
 
   var LIST_Q = 'query($q:String!,$n:Int!){products(first:$n,query:$q,sortKey:CREATED_AT,reverse:true){nodes{handle title productType vendor availableForSale featuredImage{url altText} priceRange{minVariantPrice{amount currencyCode}}}}}';
 
+  function fetchList(q, n) {
+    var query = (q ? '(' + q + ') AND ' : '') + 'available_for_sale:true';
+    return gql(LIST_Q, { q: query, n: n }).then(function (d) { return d.products.nodes; });
+  }
+
   function fill(grid, q) {
     var n = parseInt(grid.getAttribute('data-limit') || '24', 10);
     if (!live) { grid.innerHTML = sampleCards(grid.getAttribute('data-sample') || 'Device', 3); return; }
-    var query = (q ? '(' + q + ') AND ' : '') + 'available_for_sale:true';
-    gql(LIST_Q, { q: query, n: n }).then(function (d) {
-      var items = d.products.nodes;
+    var fb = grid.getAttribute('data-fallback');
+    fetchList(q, n).then(function (items) {
+      return (items.length || !fb) ? items : fetchList(fb, n);
+    }).then(function (items) {
       grid.innerHTML = items.length ? items.map(card).join('')
         : '<p class="muted">Nothing in stock here right now. New devices come in all the time, so check back soon or call ' +
           '<a href="' + cfg.phoneHref + '">' + esc(cfg.phone) + '</a>.</p>';

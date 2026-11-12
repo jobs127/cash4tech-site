@@ -33,7 +33,7 @@ BUSINESS = {
 
 SHOPIFY = {
     "domain": "cash4tech-4.myshopify.com",
-    "storefront_token": None,  # Storefront API public access token (Headless channel)
+    "storefront_token": "05b679ac1a3d0af6cb06f891f2bd5a87",  # Headless channel public token (safe in the browser, read-only)
     "api_version": "2025-07",
     # Stays False until the owner activates payments. While False, product pages show
     # "Call about this device" instead of a cart button.

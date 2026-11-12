@@ -633,11 +633,19 @@ def shop_config_script():
     return f'<script>window.C4T_SHOP = {json.dumps(cfg)};</script>'
 
 
-def product_grid(query, sample_name, limit=24):
+def fallback_terms(n):
+    """Looser keyword search used when the structured query finds nothing (e.g. product types differ)."""
+    names = [n["name"]] + [k["name"] for k in kids(n)]
+    for k in kids(n):
+        names += [m["name"] for m in kids(k)]
+    return " OR ".join(f'"{x}"' for x in dict.fromkeys(names))
+
+
+def product_grid(query, sample_name, limit=24, fallback=""):
     note = "" if SHOP_LIVE else f'<div class="todo-block mb-2"><strong>Sample cards.</strong> Live products from the Shopify catalog appear here once the store\'s Storefront API token is added to content.py.</div>'
     return f"""
     {note}
-    <div class="product-grid grid grid-3" data-query="{escape(query)}" data-limit="{limit}" data-sample="{escape(sample_name)}" aria-live="polite">
+    <div class="product-grid grid grid-3" data-query="{escape(query)}" data-fallback="{escape(fallback)}" data-limit="{limit}" data-sample="{escape(sample_name)}" aria-live="polite">
       <p class="muted">Loading products&hellip;</p>
     </div>"""
 
@@ -663,7 +671,7 @@ def buy_node(n):
 <section class="section">
   <div class="wrap">
     {chip_links(n, 'buy')}
-    {product_grid(n['query'], n['name'])}
+    {product_grid(n['query'], n['name'], fallback=fallback_terms(n))}
   </div>
 </section>
 <section class="section alt tight">
